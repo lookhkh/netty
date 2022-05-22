@@ -13,10 +13,10 @@ public class HttpHelloWorldServerInit extends ChannelInitializer<Channel> {
 
 	protected void initChannel(Channel ch) throws Exception {
 		ch.pipeline()
-		.addLast(new ReadTimeoutHandler(1000))
-		.addLast(new IdleStateHandler(3000, 3000, 3000))
 		.addLast(new LoggingHandler(LogLevel.INFO))
+		.addLast(new ReadTimeoutHandler(10))
 		.addLast(new HttpServerCodec())
+		.addLast(new OutBound())
 		.addLast(new HttpHelloWorldServerHandler());
 	};
 }
